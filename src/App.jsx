@@ -1,9 +1,18 @@
-function App() {
-  return (
-    <div className="App">
-      Assignment
-    </div>
-  );
-}
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Home from "./pages/Home"
+import Two from "./pages/Two"
 
-export default App
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/assignment/two",
+    element: <Two />,
+  },
+])
+
+export default function App() {
+  return <RouterProvider router={router} />
+}
