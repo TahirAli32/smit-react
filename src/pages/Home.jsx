@@ -48,6 +48,19 @@ const Home = () => {
                             </Link>
                         </div>
                     </Panel>
+                    <Panel header="Assignment 3" key="3">
+                        <div className="taskInfo">
+                            <div className="taskDesc">
+                                <h2>Assignment 3</h2>
+                                <ul>
+                                    <li>OLX Cards</li>
+                                </ul>
+                            </div>
+                            <Link to={'/assignment/olx'}>
+                                <div className="taskBtn">View Submission</div>
+                            </Link>
+                        </div>
+                    </Panel>
                 </Collapse>
             </div>
         </Container>
