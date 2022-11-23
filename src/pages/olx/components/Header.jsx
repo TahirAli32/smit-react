@@ -54,13 +54,6 @@ const Header = () => {
 export default Header
 
 const Container = styled.div`
-  /* height: 10vh;
-  background-color: #F7F8F8;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 8rem;
-  flex: 10; */
   & .wrapper{
     height: 10vh;
     padding: 0 8rem;

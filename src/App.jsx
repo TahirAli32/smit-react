@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./pages/Home"
 import Two from "./pages/Two"
 import OlxHome from './pages/olx/Home'
+import TuroHome from './pages/turo/Home'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: '/assignment/olx',
     element: <OlxHome />
+  },
+  {
+    path: '/assignment/turo',
+    element: <TuroHome />
   }
 ])
 

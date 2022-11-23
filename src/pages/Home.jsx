@@ -53,10 +53,23 @@ const Home = () => {
                             <div className="taskDesc">
                                 <h2>Assignment 3</h2>
                                 <ul>
-                                    <li>OLX Cards</li>
+                                    <li>OLX Clone</li>
                                 </ul>
                             </div>
                             <Link to={'/assignment/olx'}>
+                                <div className="taskBtn">View Submission</div>
+                            </Link>
+                        </div>
+                    </Panel>
+                    <Panel header="Assignment 4" key="4">
+                        <div className="taskInfo">
+                            <div className="taskDesc">
+                                <h2>Assignment 4</h2>
+                                <ul>
+                                    <li>Turo Clone</li>
+                                </ul>
+                            </div>
+                            <Link to={'/assignment/turo'}>
                                 <div className="taskBtn">View Submission</div>
                             </Link>
                         </div>
