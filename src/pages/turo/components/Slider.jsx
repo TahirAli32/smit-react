@@ -1,40 +1,58 @@
-import React, { useState } from 'react'
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-icons/bs'
+import { useState } from 'react'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import styled from 'styled-components'
 
-const Slider = () => {
+const Slider = ({ carouselTitle, sliderData, hover }) => {
 
-    let sliderData = [ '/assets/cars/bmw.jpg', '/assets/cars/ford.jpg', '/assets/cars/jeep.jpg', '/assets/cars/lambo.jpg', '/assets/cars/mb.jpg', '/assets/cars/nissan.jpg', '/assets/cars/porsche.jpg', '/assets/cars/subaru.jpg', '/assets/cars/tesla.jpg', '/assets/cars/toyota.jpg', ]
-    const [current, setCurrent] = useState(0)
+    const [position, setPosition] = useState(0)
 
     let length = sliderData.length
 
+    let maxPosition = 210 * length / 2
+
     const nextSlide = () => {
-        setCurrent(current === length - 1 ? 0 : current + 1)
-    }
-    const prevSlide = () => {
-        setCurrent(current === 0 ? length - 1 : current - 1)
+        if(Math.abs(position) === maxPosition){
+            setPosition(0)
+        }
+        else{
+            setPosition( prev => prev - 210)
+        }
     }
 
-    const moveDots = (index) => {
-        setCurrent(index)
+    const prevSlide = () => {
+        if(position === 0){
+            setPosition(-maxPosition)
+        }
+        else{
+            setPosition( prev => prev + 210)
+        }
     }
 
   return (
-    <Section className='main'>
+    <Section className='main' sliderPosition={position} hover={hover}>
+        <div className="top">
+            <p className='sliderHeading'>{carouselTitle}</p>
+            <div className="arrows">
+                <span className='leftArrow arrow'>
+                    <BsChevronLeft onClick={() => prevSlide()} />
+                </span>
+                <span className='rightArrow arrow'>
+                    <BsChevronRight onClick={() => nextSlide()} />
+                </span>
+            </div>
+        </div>
         <div className='slider'>
-            <div className='leftArrow arrow'>
-                <BsFillArrowLeftCircleFill onClick={() => prevSlide()} />
-            </div>
-            <div className='rightArrow arrow'>
-                <BsFillArrowRightCircleFill onClick={() => nextSlide()} />
-            </div>
-            <img src={sliderData[current]} width="190px" height="154px" style={{borderRadius: '5px'}} alt="Slider Pic" />
-            <div className='dots'>
-                {Array.from({length: length}).map((item,index) => (
-                    <div key={index} onClick={() => moveDots(index)} className={current === index ? 'dot active' : 'dot'}></div>
-                ))}
-            </div>
+            {sliderData.map((e,i)=>(
+                <div className="card" key={i}>
+                    <img src={e.imgSrc} 
+                        width="190px" 
+                        height="154px" 
+                        alt="Slider Pic"
+                        // {hover && style={{filter: grayscale(100%);}}}
+                    />
+                    <p>{e.imgName}</p>
+                </div>
+            ))}
         </div>
     </Section>
   )
@@ -45,74 +63,72 @@ export default Slider
 const Section = styled.section`
     display: flex;
     flex-direction: column;
-    margin-top: 3rem;
-    .slider{
-        position: relative;
+    margin: 3rem auto 0;
+    max-width: 1040px;
+    & .top{
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin: 2rem 0;
-        .arrow{
-            position: absolute;
-            top: 50%;
-            z-index: 100;
+        justify-content: space-between;
+        & .sliderHeading{
+            margin: 0;
+            padding: 0;
+            padding-left: 5px;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        & .arrows{
+            display: flex;
             user-select: none;
-            svg{
+            padding-right: 5px;
+            & .arrow{
+                display: flex;
+                align-items: center;
                 cursor: pointer;
-                font-size: 60px;
-                color: #143a51;
+                font-size: 20px;
+                margin-left: 15px;
+                color: #000;
                 :hover{
-                    color: #146597;
+                    color: #593CFB;
                 }
             }
-            @media screen and (max-width: 1240px){
-                top: 100%;
-                svg{
-                    font-size: 45px;
-                }
-            }
-        }
-        .rightArrow{
-            right: 10rem;
-            @media screen and (max-width: 1240px){
-                right: 40%;
-            }
-        }
-        .leftArrow{
-            left: 10rem;
-            @media screen and (max-width: 1240px){
-                left: 40%;
-            }
-        }
-        .slide{
-            opacity: 0;
-            transition: opacity ease-in-out .4s;
-        }
-        .active{
-            opacity: 1;
-        }
-        @media screen and (max-width: 1240px){
-            margin-bottom: 4rem;
         }
     }
-    .dots{
+    & .slider{
         display: flex;
-        position: absolute;
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 100;
-        .dot{
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 3px solid #f1f1f1;
-            margin: 0 5px;
+        align-items: center;
+        margin: 1rem 0;
+        padding-left: 5px;
+        overflow: hidden;
+        height: 220px;
+        & .card{
             cursor: pointer;
-            background: #f1f1f1;
-        }
-        .active{
-            background: rgb(32, 32, 32);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 20px;
+            box-shadow: 0 2px 4px 0 rgb(35 31 32 / 20%), 0 0 1px 0 rgb(35 31 32 / 10%);
+            min-height: 154px;
+            min-width: 190px;
+            transform: ${(props) => `translateX(${props.sliderPosition}px)`};
+            transition: all 0.2s;
+            & p{
+                text-align: center;
+                margin: 16px 0;
+                font-size: 16px;
+                font-weight: 800;
+                font-family: 'Poppins', sans-serif;
+                letter-spacing: 0.1px;
+                line-height: 20px;
+                transition: all 0.3s;
+            }
+            :hover p{
+                color: #593CFB;
+            }
+            & img{
+                filter: ${ props => props.hover && `grayscale(100%)`};
+            }
+            :hover img{
+                filter: grayscale(0%);
+            }
         }
     }
 `
