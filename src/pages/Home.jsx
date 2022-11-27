@@ -74,6 +74,19 @@ const Home = () => {
                             </Link>
                         </div>
                     </Panel>
+                    <Panel header="Assignment 5" key="5">
+                        <div className="taskInfo">
+                            <div className="taskDesc">
+                                <h2>Assignment 5</h2>
+                                <ul>
+                                    <li>Todos List</li>
+                                </ul>
+                            </div>
+                            <Link to={'/assignment/todo'}>
+                                <div className="taskBtn">View Submission</div>
+                            </Link>
+                        </div>
+                    </Panel>
                 </Collapse>
             </div>
         </Container>

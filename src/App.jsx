@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import Two from "./pages/Two"
 import OlxHome from './pages/olx/Home'
 import TuroHome from './pages/turo/Home'
+import Todo from './pages/Todo'
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   {
     path: '/assignment/turo',
     element: <TuroHome />
-  }
+  },
+  {
+    path: '/assignment/todo',
+    element: <Todo />
+  },
 ])
 
 export default function App() {
