@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Button, Form, Input, Table, Modal, Checkbox } from 'antd'
 import { auth, db } from '../firebase'
-import { collection, addDoc, query, onSnapshot, doc, updateDoc, deleteDoc, getDocs, Timestamp, orderBy } from 'firebase/firestore'
+import { collection, addDoc, query, getDocs, Timestamp } from 'firebase/firestore'
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth"
 import styled from 'styled-components'
 
 const Portfolio = () => {
-
-    const { TextArea } = Input
 
     const [projects, setProjects] = useState([])
 
